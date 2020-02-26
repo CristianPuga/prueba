@@ -1,6 +1,7 @@
 package com.hackathongestamp2020.Backend.Controllers;
 
 import com.hackathongestamp2020.Backend.Domain.Ventas;
+import com.hackathongestamp2020.Backend.Repositories.PaginationRepository;
 import com.hackathongestamp2020.Backend.Repositories.VentasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,9 +19,12 @@ public class RestVentasController {
 
     @Autowired
     private VentasRepository ventasRepository;
+    private PaginationRepository paginationRepository;
 
     @GetMapping
-    public Flux<Ventas> getAll(){
+    public Flux<Ventas> getAll(@RequestParam(defaultValue = "0") Integer page,
+                               @RequestParam(defaultValue = "10") Integer size){
+        //System.out.println(page, size);
         return this.ventasRepository.findAll();
     }
 
@@ -30,13 +34,6 @@ public class RestVentasController {
                 .map(ResponseEntity::ok)
                 .defaultIfEmpty(ResponseEntity.notFound().build());
     }
-
-   /* @GetMapping("/{id}")
-    Mono<Ventas> oneVenta(@PathVariable String id) {
-        Mono<Ventas> prueba = ventasRepository.findById(id);
-        System.out.println(prueba);
-        return prueba;
-    }*/
 
 
     @GetMapping("/{id}")

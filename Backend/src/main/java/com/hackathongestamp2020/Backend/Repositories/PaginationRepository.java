@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PaginationRepository extends PagingAndSortingRepository<Ventas, Long> {
+
 }
