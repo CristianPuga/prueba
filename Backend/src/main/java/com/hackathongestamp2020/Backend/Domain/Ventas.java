@@ -15,7 +15,6 @@ import org.springframework.data.mongodb.core.mapping.Field;
 public class Ventas {
 
     @Id
-    @Field("id")
     public String id;
 
     @Field("Region")
